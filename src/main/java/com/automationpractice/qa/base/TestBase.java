@@ -27,13 +27,12 @@ public class TestBase {
     }
 
     public static void init() {
-        if(Objects.equals(System.getProperty("browser"), "chrome")) {
+        if(properties.getProperty("browser").equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/libs/chromedriver");
             driver = new ChromeDriver();
-        } else if(Objects.equals(System.getProperty("browser"), "firefox")) {
+        } else if(properties.getProperty("browser").equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/libs/geckodriver");
             driver = new FirefoxDriver();
-
         }
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
