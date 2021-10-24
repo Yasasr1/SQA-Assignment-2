@@ -4,6 +4,7 @@ import com.automationpractice.qa.util.TestUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class TestBase {
     public static WebDriver driver;
     public static Properties properties;
+    public static WebDriverWait wait;
 
     public TestBase(){
 
@@ -38,6 +40,7 @@ public class TestBase {
         driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
         driver.get(properties.getProperty("url"));
+        wait = new WebDriverWait(driver,30);
 
     }
 
