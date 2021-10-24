@@ -24,14 +24,39 @@ public class CheckoutTest extends TestBase {
         checkoutPage = womenStorePage.checkout();
     }
 
-    @Test
+    @Test (priority=1)
     public void checkoutPageValidationTest() {
         boolean flag = checkoutPage.validateCheckoutPage();
         Assert.assertTrue(flag);
     }
 
-    @Test void unsuccessfulLoginNoEmailTest() {
+    @Test (priority=2) void verifyTotalCostTest() {
         boolean flag = checkoutPage.verifyTotalCost();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=3) void plusOneItemTest() {
+        boolean flag = checkoutPage.plusOneItem();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=4) void minusOneItemTest() {
+        boolean flag = checkoutPage.minusOneItem();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=5) void proceedWithoutAgreeingWarningTest() {
+        boolean flag = checkoutPage.proceedWithoutAgreeingWarning();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=6) void payByWireTest() {
+        boolean flag = checkoutPage.payByWire();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=7) void confirmTest() {
+        boolean flag = checkoutPage.confirm();
         Assert.assertTrue(flag);
     }
 
