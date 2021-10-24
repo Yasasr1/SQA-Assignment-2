@@ -22,11 +22,17 @@ public class WomenStorePage {
     @FindBy(xpath = "//li[@class='ajax_block_product first-in-line first-item-of-tablet-line first-item-of-mobile-line col-xs-12']//span[contains(text(),'Add to cart')]")
     WebElement addToCartBtn;
 
+    @FindBy(xpath = "//li[@class='ajax_block_product last-item-of-tablet-line col-xs-12']//span[contains(text(),'Add to cart')]")
+    WebElement addToCartBtn2;
+
     @FindBy(xpath = "//h2[normalize-space()='Product successfully added to your shopping cart']")
     WebElement successfullyAddedMsg;
 
     @FindBy(xpath = "//i[@class='icon-th-list']")
     WebElement listView;
+
+    @FindBy(xpath = "//span[@title='Close window']")
+    WebElement closeWindow;
 
     public WomenStorePage() {
         PageFactory.initElements(driver, this);
@@ -39,6 +45,16 @@ public class WomenStorePage {
     public Boolean addOneProduct() {
         listView.click();
         addToCartBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(successfullyAddedMsg));
+        return successfullyAddedMsg.isDisplayed();
+    }
+
+    public Boolean addMultipleProduct() {
+        listView.click();
+        addToCartBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(closeWindow));
+        closeWindow.click();
+        addToCartBtn2.click();
         wait.until(ExpectedConditions.visibilityOf(successfullyAddedMsg));
         return successfullyAddedMsg.isDisplayed();
     }

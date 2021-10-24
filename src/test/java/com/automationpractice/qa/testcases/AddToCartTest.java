@@ -37,8 +37,13 @@ public class AddToCartTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-//    @AfterTest
-//    public void cleanup() {
-//        driver.quit();
-//    }
+    @Test void addMultipleProductTest() {
+        boolean flag = womenStorePage.addMultipleProduct();
+        Assert.assertTrue(flag);
+    }
+
+    @AfterTest
+    public void cleanup() {
+        driver.quit();
+    }
 }
