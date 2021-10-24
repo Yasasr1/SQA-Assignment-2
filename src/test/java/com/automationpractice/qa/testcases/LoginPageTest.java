@@ -59,6 +59,7 @@ public class LoginPageTest extends TestBase {
     @Test void successfulLoginTest() {
         accountPage = loginPage.login(properties.getProperty("email_correct"), properties.getProperty("password_correct"));
         boolean flag = accountPage.validateAccountPage();
+        loginPage.logout();
         Assert.assertTrue(flag);
     }
 

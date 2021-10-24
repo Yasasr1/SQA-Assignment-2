@@ -9,6 +9,9 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//span[normalize-space()='Sign in']")
     WebElement loginBtn;
 
+    @FindBy(xpath = "//a[@title='Log me out']")
+    WebElement logoutBtn;
+
     @FindBy(xpath = "//input[@id='email']")
     WebElement emailField;
 
@@ -39,6 +42,8 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateNoEmail(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
@@ -46,6 +51,8 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateInvalidEmail(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
@@ -53,6 +60,8 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateIncorrectEmail(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
@@ -60,6 +69,8 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateNoPassword(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
@@ -67,6 +78,8 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateInvalidPassword(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
@@ -74,17 +87,26 @@ public class LoginPage extends TestBase {
     }
 
     public Boolean validateIncorrectPassword(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
         return authenticationFail.isDisplayed();
     }
 
+    public void logout() {
+        logoutBtn.click();
+    }
 
     public AccountPage login(String email, String password) {
+        emailField.clear();
+        passwordField.clear();
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
         return new AccountPage();
     }
+
+
 }
