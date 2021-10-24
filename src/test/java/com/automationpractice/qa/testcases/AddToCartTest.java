@@ -3,22 +3,22 @@ package com.automationpractice.qa.testcases;
 import com.automationpractice.qa.base.TestBase;
 import com.automationpractice.qa.pages.AccountPage;
 import com.automationpractice.qa.pages.LoginPage;
+import com.automationpractice.qa.pages.ProductPage;
 import com.automationpractice.qa.pages.WomenStorePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class AddToCartTest extends TestBase {
     LoginPage loginPage;
     AccountPage accountPage;
     WomenStorePage womenStorePage;
+    ProductPage productPage;
 
     public AddToCartTest() {
         super();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         init();
         loginPage = new LoginPage();
@@ -42,7 +42,19 @@ public class AddToCartTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-    @AfterTest
+    @Test void addMultipleItemsTest() {
+        productPage = womenStorePage.clickMore();
+        boolean flag = productPage.addMultipleItems();
+        Assert.assertTrue(flag);
+    }
+
+    @Test void changeColorTest() {
+        productPage = womenStorePage.clickMore();
+        boolean flag = productPage.changeColor();
+        Assert.assertTrue(flag);
+    }
+
+    @AfterMethod
     public void cleanup() {
         driver.quit();
     }

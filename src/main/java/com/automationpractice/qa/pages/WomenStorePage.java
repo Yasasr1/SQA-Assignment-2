@@ -34,6 +34,9 @@ public class WomenStorePage {
     @FindBy(xpath = "//span[@title='Close window']")
     WebElement closeWindow;
 
+    @FindBy(xpath = "//li[@class='ajax_block_product first-in-line first-item-of-tablet-line first-item-of-mobile-line col-xs-12']//span[contains(text(),'More')]")
+    WebElement moreBtn;
+
     public WomenStorePage() {
         PageFactory.initElements(driver, this);
     }
@@ -57,6 +60,12 @@ public class WomenStorePage {
         addToCartBtn2.click();
         wait.until(ExpectedConditions.visibilityOf(successfullyAddedMsg));
         return successfullyAddedMsg.isDisplayed();
+    }
+
+    public ProductPage clickMore(){
+        listView.click();
+        moreBtn.click();
+        return new ProductPage();
     }
 
 }
