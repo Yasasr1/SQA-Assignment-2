@@ -26,7 +26,37 @@ public class LoginPageTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-    @Test void loginTest() {
+    @Test void unsuccessfulLoginNoEmailTest() {
+        boolean flag = loginPage.validateNoEmail("", properties.getProperty("password_correct"));
+        Assert.assertTrue(flag);
+    }
+
+    @Test void unsuccessfulLoginInvalidEmailTest() {
+        boolean flag = loginPage.validateInvalidEmail(properties.getProperty("email_invalid"), properties.getProperty("password_correct"));
+        Assert.assertTrue(flag);
+    }
+
+    @Test void unsuccessfulLoginIncorrectEmailTest() {
+        boolean flag = loginPage.validateIncorrectEmail(properties.getProperty("email_incorrect"), properties.getProperty("password_correct"));
+        Assert.assertTrue(flag);
+    }
+
+    @Test void unsuccessfulLoginNoPasswordTest() {
+        boolean flag = loginPage.validateNoPassword(properties.getProperty("email_correct"), "");
+        Assert.assertTrue(flag);
+    }
+
+    @Test void unsuccessfulLoginInvalidPasswordTest() {
+        boolean flag = loginPage.validateInvalidPassword(properties.getProperty("email_correct"), properties.getProperty("password_invalid"));
+        Assert.assertTrue(flag);
+    }
+
+    @Test void unsuccessfulLoginIncorrectPasswordTest() {
+        boolean flag = loginPage.validateIncorrectPassword(properties.getProperty("email_correct"), properties.getProperty("password_incorrect"));
+        Assert.assertTrue(flag);
+    }
+
+    @Test void successfulLoginTest() {
         accountPage = loginPage.login(properties.getProperty("email_correct"), properties.getProperty("password_correct"));
         boolean flag = accountPage.validateAccountPage();
         Assert.assertTrue(flag);
