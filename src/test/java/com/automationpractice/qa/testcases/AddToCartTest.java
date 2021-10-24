@@ -37,8 +37,8 @@ public class AddToCartTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-    @AfterTest
-    public void cleanup() {
-        driver.quit();
-    }
+//    @AfterTest
+//    public void cleanup() {
+//        driver.quit();
+//    }
 }
