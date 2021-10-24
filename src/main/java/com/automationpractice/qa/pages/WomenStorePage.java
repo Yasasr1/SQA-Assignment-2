@@ -37,6 +37,9 @@ public class WomenStorePage {
     @FindBy(xpath = "//li[@class='ajax_block_product first-in-line first-item-of-tablet-line first-item-of-mobile-line col-xs-12']//span[contains(text(),'More')]")
     WebElement moreBtn;
 
+    @FindBy(xpath = "//span[normalize-space()='Proceed to checkout']")
+    WebElement checkoutBtn;
+
     public WomenStorePage() {
         PageFactory.initElements(driver, this);
     }
@@ -66,6 +69,14 @@ public class WomenStorePage {
         listView.click();
         moreBtn.click();
         return new ProductPage();
+    }
+
+    public CheckoutPage checkout(){
+        listView.click();
+        addToCartBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(checkoutBtn));
+        checkoutBtn.click();
+        return new CheckoutPage();
     }
 
 }
