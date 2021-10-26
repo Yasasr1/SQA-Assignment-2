@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite thread-count="1" verbose="1" name="Gmail Suite" annotations="JDK" parallel="tests">
+
+    <test name="login-test">
+        <classes>
+            <class name="com.automationpractice.qa.testcases.LoginPageTest"/>
+        </classes>
+    </test>
+
+    <test name="add-to-cart-test">
+        <classes>
+            <class name="com.automationpractice.qa.testcases.AddToCartTest"/>
+        </classes>
+    </test>
+
+    <test name="checkout-test">
+        <classes>
+            <class name="com.automationpractice.qa.testcases.CheckoutTest"/>
+        </classes>
+    </test>
+</suite>
