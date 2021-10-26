@@ -3,7 +3,9 @@ package com.automationpractice.qa.testcases;
 import com.automationpractice.qa.base.TestBase;
 import com.automationpractice.qa.pages.AccountPage;
 import com.automationpractice.qa.pages.LoginPage;
+import com.automationpractice.qa.util.TestUtil;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 public class LoginPageTest extends TestBase {
@@ -61,6 +63,19 @@ public class LoginPageTest extends TestBase {
         boolean flag = accountPage.validateAccountPage();
         loginPage.logout();
         Assert.assertTrue(flag);
+    }
+
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        if(ITestResult.FAILURE==result.getStatus()) {
+            String testName = result.getName();
+            try {
+                TestUtil.takeScreenshot(driver, System.getProperty("user.dir") + TestUtil.SCREENSHOT_PATH + testName + ".png");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
     }
 
     @AfterTest

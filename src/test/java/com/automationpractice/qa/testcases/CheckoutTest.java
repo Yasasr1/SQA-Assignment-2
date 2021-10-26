@@ -2,7 +2,9 @@ package com.automationpractice.qa.testcases;
 
 import com.automationpractice.qa.base.TestBase;
 import com.automationpractice.qa.pages.*;
+import com.automationpractice.qa.util.TestUtil;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 public class CheckoutTest extends TestBase {
@@ -68,6 +70,19 @@ public class CheckoutTest extends TestBase {
     @Test (priority=9) void confirmTest() {
         boolean flag = checkoutPage.confirm();
         Assert.assertTrue(flag);
+    }
+
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        if(ITestResult.FAILURE==result.getStatus()) {
+            String testName = result.getName();
+            try {
+                TestUtil.takeScreenshot(driver, System.getProperty("user.dir") + TestUtil.SCREENSHOT_PATH + testName + ".png");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
     }
 
     @AfterTest
