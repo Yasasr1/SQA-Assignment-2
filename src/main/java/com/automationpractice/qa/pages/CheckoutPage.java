@@ -51,14 +51,26 @@ public class CheckoutPage {
     @FindBy(xpath = "//a[@title='Pay by bank wire']//span[contains(text(),'(order processing will be longer)')]")
     WebElement payByWireBtn;
 
+    @FindBy(xpath = "//a[@title='Pay by check.']")
+    WebElement payByCheckBtn;
+
     @FindBy(xpath = "//span[normalize-space()='I confirm my order']")
     WebElement confirmBtn;
 
-    @FindBy(xpath = "//strong[normalize-space()='Your order on My Store is complete.']")
+    @FindBy(xpath = "//p[@class='alert alert-success']")
     WebElement orderCompleteMsg;
 
-    @FindBy(xpath ="//h1[@class='page-heading']")
-    WebElement orderSummaryTitle;
+    @FindBy(xpath ="//strong[contains(text(),'You have chosen to pay by bank wire. Here is a sho')]")
+    WebElement orderSummaryTitleForWire;
+
+    @FindBy(xpath ="//strong[contains(text(),'You have chosen to pay by check. Here is a short s')]")
+    WebElement orderSummaryTitleForCheck;
+
+    @FindBy(xpath = "//li[@class='step_done step_done_last four']//a[1]")
+    WebElement shippingBtn;
+
+    @FindBy(xpath = "//h1[@class='page-heading']")
+    WebElement shippingTitle;
 
     public CheckoutPage() {
         PageFactory.initElements(driver, this);
@@ -104,8 +116,25 @@ public class CheckoutPage {
         proceedBtn3.click();
         wait.until(ExpectedConditions.visibilityOf(payByWireBtn));
         payByWireBtn.click();
-        wait.until(ExpectedConditions.visibilityOf(orderSummaryTitle));
-        return orderSummaryTitle.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(orderSummaryTitleForWire));
+        return orderSummaryTitleForWire.isDisplayed();
+    }
+
+    public Boolean goBack(){
+        shippingBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(shippingTitle));
+        return shippingTitle.isDisplayed();
+    }
+
+    public Boolean payByCheck(){
+        wait.until(ExpectedConditions.visibilityOf(agreeToTerms));
+        agreeToTerms.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
+        proceedBtn3.click();
+        wait.until(ExpectedConditions.visibilityOf(payByCheckBtn));
+        payByCheckBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(orderSummaryTitleForCheck));
+        return orderSummaryTitleForCheck.isDisplayed();
     }
 
     public Boolean confirm(){
@@ -114,6 +143,4 @@ public class CheckoutPage {
         wait.until(ExpectedConditions.visibilityOf(orderCompleteMsg));
         return orderCompleteMsg.isDisplayed();
     }
-
-
 }

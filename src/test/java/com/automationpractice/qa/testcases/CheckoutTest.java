@@ -55,7 +55,17 @@ public class CheckoutTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=7) void confirmTest() {
+    @Test (priority=7) void goBackTest() {
+        boolean flag = checkoutPage.goBack();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=8) void payByBankTest() {
+        boolean flag = checkoutPage.payByCheck();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=9) void confirmTest() {
         boolean flag = checkoutPage.confirm();
         Assert.assertTrue(flag);
     }
