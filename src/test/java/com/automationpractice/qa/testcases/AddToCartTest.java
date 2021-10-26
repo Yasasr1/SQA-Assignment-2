@@ -66,7 +66,6 @@ public class AddToCartTest extends TestBase {
                 System.out.println(e);
             }
         }
-
     }
 
     @AfterMethod

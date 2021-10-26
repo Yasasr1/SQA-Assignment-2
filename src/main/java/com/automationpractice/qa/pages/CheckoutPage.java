@@ -1,11 +1,16 @@
 package com.automationpractice.qa.pages;
 
+import com.automationpractice.qa.util.TestUtil;
 import org.checkerframework.framework.qual.FieldInvariant;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.devtools.v85.webaudio.WebAudio;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.automationpractice.qa.base.TestBase.driver;
 import static com.automationpractice.qa.base.TestBase.wait;
@@ -24,7 +29,7 @@ public class CheckoutPage {
     @FindBy(xpath = "//a[@id='cart_quantity_down_1_1_0_591283']//span")
     WebElement minusBtn;
 
-    @FindBy (xpath = "//i[@class='icon-trash']")
+    @FindBy(xpath = "//i[@class='icon-trash']")
     WebElement trashBtn;
 
     @FindBy(xpath = "//span[@id='total_price'][text()=\"$35.02\"]")
@@ -60,10 +65,10 @@ public class CheckoutPage {
     @FindBy(xpath = "//p[@class='alert alert-success']")
     WebElement orderCompleteMsg;
 
-    @FindBy(xpath ="//strong[contains(text(),'You have chosen to pay by bank wire. Here is a sho')]")
+    @FindBy(xpath = "//strong[contains(text(),'You have chosen to pay by bank wire. Here is a sho')]")
     WebElement orderSummaryTitleForWire;
 
-    @FindBy(xpath ="//strong[contains(text(),'You have chosen to pay by check. Here is a short s')]")
+    @FindBy(xpath = "//strong[contains(text(),'You have chosen to pay by check. Here is a short s')]")
     WebElement orderSummaryTitleForCheck;
 
     @FindBy(xpath = "//li[@class='step_done step_done_last four']//a[1]")
@@ -93,19 +98,19 @@ public class CheckoutPage {
         return totalPrice.isDisplayed();
     }
 
-    public Boolean plusOneItem(){
+    public Boolean plusOneItem() {
         plusBtn.click();
         wait.until(ExpectedConditions.visibilityOf(totalPrice2));
         return totalPrice2.isDisplayed();
     }
 
-    public Boolean minusOneItem(){
+    public Boolean minusOneItem() {
         minusBtn.click();
         wait.until(ExpectedConditions.visibilityOf(totalPrice));
         return totalPrice.isDisplayed();
     }
 
-    public AddressPage goToAddressPage(){
+    public AddressPage goToAddressPage() {
         wait.until(ExpectedConditions.visibilityOf(proceedBtn));
         proceedBtn.click();
         wait.until(ExpectedConditions.visibilityOf(updateAddress));
@@ -113,19 +118,25 @@ public class CheckoutPage {
         return new AddressPage();
     }
 
-    public String getName(){
-        return addressName.getText();
+
+    public Boolean verifyAddress() {
+        ArrayList<String> words = new ArrayList<String>();
+        try {
+            String filePath = System.getProperty("user.dir") + "/src/main/java/com/automationpractice/qa/testdata/";
+            words = TestUtil.readExcel(filePath, "data.xlsx", "Sheet1");
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        if (addressName.getText().equals(words.get(0) + " " + words.get(1)) && addressCompany.getText().equals(words.get(2))) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public String getAddress(){
-        return addressName.getText();
-    }
-
-    public Boolean verifyAddress(){
-        return true;
-    }
-
-    public Boolean proceedWithoutAgreeingWarning(){
+    public Boolean proceedWithoutAgreeingWarning() {
         wait.until(ExpectedConditions.visibilityOf(proceedBtn2));
         proceedBtn2.click();
         wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
@@ -134,7 +145,7 @@ public class CheckoutPage {
         return agreeWarning.isDisplayed();
     }
 
-    public Boolean payByWire(){
+    public Boolean payByWire() {
         wait.until(ExpectedConditions.visibilityOf(warningCloseBtn));
         warningCloseBtn.click();
         wait.until(ExpectedConditions.visibilityOf(agreeToTerms));
@@ -147,13 +158,13 @@ public class CheckoutPage {
         return orderSummaryTitleForWire.isDisplayed();
     }
 
-    public Boolean goBack(){
+    public Boolean goBack() {
         shippingBtn.click();
         wait.until(ExpectedConditions.visibilityOf(shippingTitle));
         return shippingTitle.isDisplayed();
     }
 
-    public Boolean payByCheck(){
+    public Boolean payByCheck() {
         wait.until(ExpectedConditions.visibilityOf(agreeToTerms));
         agreeToTerms.click();
         wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
@@ -164,7 +175,7 @@ public class CheckoutPage {
         return orderSummaryTitleForCheck.isDisplayed();
     }
 
-    public Boolean confirm(){
+    public Boolean confirm() {
         wait.until(ExpectedConditions.visibilityOf(confirmBtn));
         confirmBtn.click();
         wait.until(ExpectedConditions.visibilityOf(orderCompleteMsg));
