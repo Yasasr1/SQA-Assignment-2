@@ -10,6 +10,7 @@ public class CheckoutTest extends TestBase {
     AccountPage accountPage;
     WomenStorePage womenStorePage;
     CheckoutPage checkoutPage;
+    AddressPage addressPage;
 
     public CheckoutTest() {
         super();
@@ -45,27 +46,34 @@ public class CheckoutTest extends TestBase {
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=5) void proceedWithoutAgreeingWarningTest() {
+    @Test (priority=5) void updateAddressTest() {
+        addressPage = checkoutPage.goToAddressPage();
+        checkoutPage = addressPage.updateAddress();
+        boolean flag = checkoutPage.verifyAddress();
+        Assert.assertTrue(flag);
+    }
+
+    @Test (priority=6) void proceedWithoutAgreeingWarningTest() {
         boolean flag = checkoutPage.proceedWithoutAgreeingWarning();
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=6) void payByWireTest() {
+    @Test (priority=7) void payByWireTest() {
         boolean flag = checkoutPage.payByWire();
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=7) void goBackTest() {
+    @Test (priority=8) void goBackTest() {
         boolean flag = checkoutPage.goBack();
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=8) void payByBankTest() {
+    @Test (priority=9) void payByBankTest() {
         boolean flag = checkoutPage.payByCheck();
         Assert.assertTrue(flag);
     }
 
-    @Test (priority=9) void confirmTest() {
+    @Test (priority=10) void confirmTest() {
         boolean flag = checkoutPage.confirm();
         Assert.assertTrue(flag);
     }

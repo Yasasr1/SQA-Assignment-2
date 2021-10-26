@@ -21,7 +21,7 @@ public class CheckoutPage {
     @FindBy(xpath = "//i[@class='icon-plus']")
     WebElement plusBtn;
 
-    @FindBy(xpath = "//a[@id='cart_quantity_down_1_1_0_588828']//span")
+    @FindBy(xpath = "//a[@id='cart_quantity_down_1_1_0_591283']//span")
     WebElement minusBtn;
 
     @FindBy (xpath = "//i[@class='icon-trash']")
@@ -72,6 +72,15 @@ public class CheckoutPage {
     @FindBy(xpath = "//h1[@class='page-heading']")
     WebElement shippingTitle;
 
+    @FindBy(xpath = "//ul[@id='address_delivery']//span[contains(text(),'Update')]")
+    WebElement updateAddress;
+
+    @FindBy(xpath = "//ul[@id='address_delivery']//li[@class='address_firstname address_lastname']")
+    WebElement addressName;
+
+    @FindBy(xpath = "//ul[@id='address_delivery']//li[@class='address_company']")
+    WebElement addressCompany;
+
     public CheckoutPage() {
         PageFactory.initElements(driver, this);
     }
@@ -96,9 +105,27 @@ public class CheckoutPage {
         return totalPrice.isDisplayed();
     }
 
-    public Boolean proceedWithoutAgreeingWarning(){
+    public AddressPage goToAddressPage(){
         wait.until(ExpectedConditions.visibilityOf(proceedBtn));
         proceedBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(updateAddress));
+        updateAddress.click();
+        return new AddressPage();
+    }
+
+    public String getName(){
+        return addressName.getText();
+    }
+
+    public String getAddress(){
+        return addressName.getText();
+    }
+
+    public Boolean verifyAddress(){
+        return true;
+    }
+
+    public Boolean proceedWithoutAgreeingWarning(){
         wait.until(ExpectedConditions.visibilityOf(proceedBtn2));
         proceedBtn2.click();
         wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
