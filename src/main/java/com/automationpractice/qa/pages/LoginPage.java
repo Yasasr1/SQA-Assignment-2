@@ -108,5 +108,15 @@ public class LoginPage extends TestBase {
         return new AccountPage();
     }
 
+    public void loginFail(String email, String password) {
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
+        loginBtn.click();
+    }
+
+    public boolean getAuthenticationFailed() {
+        return authenticationFail.isDisplayed();
+    }
+
 
 }
