@@ -175,6 +175,36 @@ public class CheckoutPage {
         return orderSummaryTitleForCheck.isDisplayed();
     }
 
+    public boolean payByCheckBdd() {
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn));
+        proceedBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn2));
+        proceedBtn2.click();
+        wait.until(ExpectedConditions.visibilityOf(agreeToTerms));
+        agreeToTerms.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
+        proceedBtn3.click();
+        wait.until(ExpectedConditions.visibilityOf(payByCheckBtn));
+        payByCheckBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(orderSummaryTitleForCheck));
+        return orderSummaryTitleForCheck.isDisplayed();
+    }
+
+    public boolean payByWireBdd() {
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn));
+        proceedBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn2));
+        proceedBtn2.click();
+        wait.until(ExpectedConditions.visibilityOf(agreeToTerms));
+        agreeToTerms.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedBtn3));
+        proceedBtn3.click();
+        wait.until(ExpectedConditions.visibilityOf(payByWireBtn));
+        payByWireBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(orderSummaryTitleForWire));
+        return orderSummaryTitleForWire.isDisplayed();
+    }
+
     public Boolean confirm() {
         wait.until(ExpectedConditions.visibilityOf(confirmBtn));
         confirmBtn.click();

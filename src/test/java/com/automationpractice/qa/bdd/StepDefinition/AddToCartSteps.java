@@ -13,7 +13,7 @@ public class AddToCartSteps extends TestBase {
     LoginPage loginPage;
     AccountPage accountPage;
     WomenStorePage womenStorePage;
-    Boolean cartVerified;
+    private boolean cartVerified;
 
     public AddToCartSteps() {
         super();
@@ -32,6 +32,12 @@ public class AddToCartSteps extends TestBase {
     public void addToCart() throws Throwable
     {
         cartVerified = womenStorePage.addOneProduct();
+    }
+
+    @When("^User selects multiple products and press add to cart button$")
+    public void addMultipleToCart() throws Throwable
+    {
+        cartVerified = womenStorePage.addMultipleProduct();
     }
 
     @Then("^Product is added to the cart$")
