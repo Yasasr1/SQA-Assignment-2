@@ -24,6 +24,7 @@ public class LoginPageTest extends TestBase {
 
     @Test
     public void loginPageValidationTest() {
+        logger.trace("Hello");
         boolean flag = loginPage.validateLoginPage();
         Assert.assertTrue(flag);
     }
