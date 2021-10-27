@@ -1,6 +1,8 @@
 package com.automationpractice.qa.base;
 
 import com.automationpractice.qa.util.TestUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,6 +18,8 @@ public class TestBase {
     public static WebDriver driver;
     public static Properties properties;
     public static WebDriverWait wait;
+
+    public static final Logger logger = LogManager.getLogger(TestBase.class);
 
     public TestBase(){
 
