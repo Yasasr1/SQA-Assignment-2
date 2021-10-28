@@ -47,5 +47,6 @@ public class CheckoutSteps extends TestBase {
     public void verifyBankPayment() throws Throwable
     {
         Assert.assertTrue(paymentVerified);
+        driver.quit();
     }
 }

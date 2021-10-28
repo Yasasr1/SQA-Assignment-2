@@ -1,7 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite thread-count="1" verbose="1" name="Gmail Suite" annotations="JDK" parallel="tests">
-
+    <test name="cuucmber-tests">
+        <classes>
+            <class name="com.automationpractice.qa.bdd.TestRunner.Runner"/>
+        </classes>
+    </test>
     <test name="login-test">
         <classes>
             <class name="com.automationpractice.qa.testcases.LoginPageTest"/>
