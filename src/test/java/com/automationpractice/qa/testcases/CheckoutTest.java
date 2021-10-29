@@ -82,13 +82,17 @@ public class CheckoutTest extends TestBase {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+        String testName = result.getName();
         if(ITestResult.FAILURE==result.getStatus()) {
-            String testName = result.getName();
+            logger.error(testName + " failed");
             try {
                 TestUtil.takeScreenshot(driver, System.getProperty("user.dir") + TestUtil.SCREENSHOT_PATH + testName + ".png");
             } catch (Exception e) {
                 System.out.println(e);
             }
+        }
+        else{
+            logger.info(testName + " passed");
         }
 
     }
